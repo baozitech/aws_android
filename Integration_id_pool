@@ -1,0 +1,11 @@
+cognitoUser.getSessionInBackground(new AuthenticationHandler() {
+	@Override
+	public void onSuccess(CognitoUserSession session) {
+		String idToken = session.getIdToken().getJWTToken();
+
+		Map<String, String> logins = new HashMap<String, String>();
+		logins.put("cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID>", session.getIdToken().getJWTToken());
+		credentialsProvider.setLogins(logins);
+	}
+
+});
